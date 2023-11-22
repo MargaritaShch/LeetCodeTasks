@@ -111,3 +111,53 @@ const reduce = function(nums, fn, init) {
     }
     return sum
 };
+
+/*8.Given an array of functions [f1, f2, f3, ..., fn], return a new function fn that is the function composition of the array of functions. The function composition of [f(x), g(x), h(x)] is fn(x) = f(g(h(x))). The function composition of an empty list of functions is the identity function f(x) = x. You may assume each function in the array accepts one integer as input and returns one integer as output. */
+const compose = function(functions){
+    return function(x){
+//если в массиве одно значение, его и возвращать
+        if(functions.length === 0){
+            return x;
+        } 
+
+        let result = x;
+//проходимся по массиву ф-ий с конца
+        for(let i =functions.length-1; i >=0; i-- ){
+//результат выполнения становится новым занчением каждой последуюзей ф-ии
+            result = functions[i](result)
+        }
+        return result;
+    }
+}
+
+/*9.Write a function argumentsLength that returns the count of arguments passed to it. */
+const argumentsLength = function(...args) {
+    let result = 0;
+    for(let i =0; i <args.length; i++){
+        result = args[i].length
+  }
+  return result
+};
+
+let a = [5]
+let b = [1,2,3]
+console.log(argumentsLength(a))
+console.log(argumentsLength(b))
+
+/*10.Given a function fn, return a new function that is identical to the original function except that it ensures fn is called at most once.The first time the returned function is called, it should return the same result as fn.Every subsequent time it is called, it should return undefined. */
+const once = function(fn) {
+    //отследить - была ли функция вызвана
+    let calls  = false;
+    return function(...args){
+//если еще не была вызвана
+        if(!calls){
+//функция была вызвана
+            calls = true
+//вызывается fn с аргументами
+           return fn(...args);
+        } else{
+//функция уже вызвана и возвращается undefined  
+            return undefined  
+        }
+    }
+}
