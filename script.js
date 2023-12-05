@@ -171,4 +171,78 @@ const addTwoPromises = async function(promise1, promise2) {
 /*12.Given a positive integer millis, write an asynchronous function that sleeps for millis milliseconds. It can resolve any value.*/
 async function sleep(millis) {
     await new Promise((resolve) =>setTimeout(resolve, millis))
- }
+}
+
+/*13.Given an array arr and a function fn, return a sorted array sortedArr. You can assume fn only returns numbers and those numbers determine the sort order of sortedArr. sortedArray must be sorted in ascending order by fn output.
+You may assume that fn will never duplicate numbers for a given array. */
+var sortBy = function(arr, fn) {
+    // с помощью slice() копируем массив. В sort -сортируем с помощью определения разницы определяем какой элемент будет первым 
+    return arr.slice().sort((a,b)=>fn(a)-fn(b))
+  };
+
+/*14.Design a Calculator class. The class should provide the mathematical operations of addition, subtraction, multiplication, division, and exponentiation. It should also allow consecutive operations to be performed using method chaining. The Calculator class constructor should accept a number which serves as the initial value of result.Your Calculator class should have the following methods:
+add - This method adds the given number value to the result and returns the updated Calculator.
+subtract - This method subtracts the given number value from the result and returns the updated Calculator.
+multiply - This method multiplies the result  by the given number value and returns the updated Calculator.
+divide - This method divides the result by the given number value and returns the updated Calculator. If the passed value is 0, an error "Division by zero is not allowed" should be thrown.
+power - This method raises the result to the power of the given number value and returns the updated Calculator.
+getResult - This method returns the result. */
+class Calculator {
+	constructor(value) {
+		this.value = value
+	}
+
+	add(value){
+		this.value+=value
+        return this
+	}
+
+
+	subtract(value){
+		this.value-=value
+        return this     
+	}
+
+	multiply(value) {
+		this.value*=value
+        return this
+	}
+
+	divide(value) {
+          if(value===0){
+               throw new Error ('Error')
+          } 
+          this.value/=value
+          return this	
+	}
+  
+	power(value) {
+		this.value**=value
+        return this
+	}
+
+	getResult() {
+		return this.value
+	}
+}
+
+const myCalculator = new Calculator(0); // Initialize with an initial value
+const result = myCalculator.add(5).multiply(3).divide(2).power(2).getResult();
+console.log(result);// Result = 56.25
+
+/*15.Given an object or an array, return if it is empty.An empty object contains no key-value pairs.An empty array contains no elements. */
+var isEmpty = function(obj) {
+    //если массив
+    if(Array.isArray(obj).length===0){
+         return true
+         //если объект
+    } else if(Object.keys(obj).length===0){
+         return true
+    }
+    return false
+};
+
+let obj1 = [null, false, 0];
+let obj2 ={}
+console.log(isEmpty(obj1))
+console.log(isEmpty(obj2))
