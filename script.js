@@ -246,3 +246,76 @@ let obj1 = [null, false, 0];
 let obj2 ={}
 console.log(isEmpty(obj1))
 console.log(isEmpty(obj2))
+
+/*16.Зареверсить слова в строке, но оставить позицию этих слова на месте */
+function revrseString(str){
+    let arr = str.split(' ')
+    let reversWord = arr.map((word) =>{ 
+        //тк просто reverse() нельзя использовать потому что он нарушает условия выполнения map, нужно разделить слова на массив,переверенуть и соединить
+        return word.split('').reverse().join('')})
+    return reversWord.join(' ')
+}
+
+console.log(revrseString('well done'))//Result = "llew enod"
+
+/*17. Задача на сортировку людей по росту. Есть ф-я которая принмиаетя в себя два параметра имена и рост.Сопоставить имена и рост и по возрастанию построить*/
+
+const sortingeople =(arr1,arr2)=>{
+    let people =[];
+    for(let i=0; i<arr1.length; i++){
+       people.push({name: arr1[i], height: arr2[i]})
+        
+        }
+       return people.sort((a,b)=> a.height-b.height);   
+    }
+
+let names = ['Mary',"John",'Emma']
+let height=[180, 165,170]
+console.log(sortingeople(names,height))
+
+/*18.Ф-я принимает один аргумент(число). Это число положительное, нужно найти сумму всех чисел от одного до этого числа которые деляться на 3,5,7 */
+
+const sum =(num)=>{
+    let arr =[]
+    let sumArr =0
+    for(let i=1; i<=num; i++){
+        if(i%3 ===0 || i%5 ===0 || i%7===0){
+            arr.push(i)  
+        }
+        sumArr = arr.reduce((acc,cerValue)=>acc+cerValue,0)
+    }
+    return sumArr
+}
+
+console.log(sum(9))
+
+/*19.Есть массив из строк каждая строка это массив из строк, каждая строка это предложение. Найти предлодение у которого самое больщое количество слов */
+const maxWSentanceCount =(arr)=>{
+    //хранение количества слов в самом длинном предложении
+    let maxWords =0
+    let longSen = ''
+    for(let i=0; i<arr.length; i++){
+        let arrOfSen =arr[i].split(' ')
+        //если количество слов в текущем предложении больше, чем maxWordCount, то обновляем maxWordCount и сохраняем текущее предложение в longSen
+            if(maxWords <arrOfSen.length){
+                maxWords = arrOfSen.length
+                longSen = arr[i]
+            }
+    }
+    return longSen 
+}
+
+const sentences = [
+    'The quick brown fox jumps over the lazy dog.',
+    'A journey of a thousand miles begins with a single step.',
+    'To be or not to be, that is the question.',
+    'All that glitters is not gold.',
+    'In the beginning God created the heavens and the earth.',
+    'Two roads diverged in a wood, and I took the one less traveled by.',
+    'The only thing we have to fear is fear itself.',
+    'Where there is love there is life.',
+    'It is not the strongest of the species that survive, nor the most intelligent, but the one most responsive to change.',
+    'The greatest glory in living lies not in never falling, but in rising every time we fall.'
+  ];
+
+console.log(maxWSentanceCount(sentences))
