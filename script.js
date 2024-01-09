@@ -1,3 +1,5 @@
+
+
 /*1.Write a function createHelloWorld. It should return a new function that always returns "Hello World". */
 const createHelloWorld = function() {
     let args =['Hello', "World"];
@@ -319,3 +321,120 @@ const sentences = [
   ];
 
 console.log(maxWSentanceCount(sentences))
+
+/*20. Найти самый длинный префикс среди заданых строк: line, listen, library -> li*/
+//1. Вариант: сравнить строки попарно
+//функция сравнения попарно 
+const getCommonPrefix=(prefix, str2)=>{
+    let result ='';
+    //сразу как одна из переменных дойдет до конца строки, цикл остановится, поскольку одна из строк будет уже завершена
+    for(let i=0, j=0;
+        i <=prefix.length && j < str2.length; 
+        i++, j++){
+        //если префикс не равен строке2 то выходим/заканчиваем
+        if(prefix[i] != str2[j]){
+            break
+        }
+        //если симовлы на этой итерации одинаковые, то добавляем в переменную result
+       result += prefix[i]
+    }
+    return result;
+}
+
+function getLongestPrefix(arr){
+    //проинициализуеруем первой строкой для массива, т.е на первом шаге решаем что префикс это первое слово в массиве 
+   let prefix =arr[0]
+   //запускаем цикл для входа всех строк, начианем сщ второго, т.к. 1 мы уже созранили в переменной prefix, и нет смысла пробегаться по нему еще раз 
+   for(let i = 1; i <arr.length; i++){
+    //присваеваем переменной  prefix функцию с предыдущим состоянием и строку в массиве
+    prefix=getCommonPrefix(prefix, arr[i])
+   }
+   return prefix
+}
+const arrLine = ["line","listen", "library"]
+const arrAlph =['abc345',"abcojpohp", "abcdrw", 'abcpoiu']
+console.log(getLongestPrefix(arrLine))//Result = li
+console.log(getLongestPrefix(arrAlph))//Result = abc
+//оптимальное решение для этой же задачи
+function getLongestPrefix2(arr){
+   //сначала отсортируем массив
+   arr.sort()
+   //вывести минимальную длину между двумя строками: сравниваем первую и последнюю строку
+   const minLine = Math.min(arr[0].length, arr[arr.length-1].length)
+   //проходимся по 6(из результата minLine) элементам в этих двух строках
+   // в цикле i<minLine до тех пор пока симовол в первой равен символу в последней строке, будем инкреметировать счетчик
+   i=0
+   while(i<minLine && arr[0][i] ===arr[arr.length-1][i]){
+    i++;
+   }
+   return arr[0].substring(0,i)
+//    return i//3
+//    return minLine//6
+}
+
+const arrLine2 = ["line","listen", "library"]
+const arrAlph2 =['abc345',"abcojpohp", "abcdrw", 'abcpoiu']
+console.log(getLongestPrefix2(arrLine2))//Result = li
+console.log(getLongestPrefix2(arrAlph2))//Result = abc
+
+/*21.Определить являются ли строки анаграммой (состоят из одних и тех же символов): listen -> silent (EASY LEVEL)*/ 
+function isAnagramm(str1,str2){
+    let constStr1 = str1.split('').sort().join('');
+    let constStr2 = str2.split('').sort().join('')
+
+    return constStr1 === constStr2
+}
+
+console.log(isAnagramm('listen',"silent"))//Result = true
+console.log(isAnagramm('listen',"silenthill"))//Result = false
+
+/*22.	Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.You may assume that each input would have exactly one solution, and you may not use the same element twice.You can return the answer in any order.
+Example 1:
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1] (EASY LEVEL)*/
+
+function indicesTwoNumbers(nums, target){
+    const hashMap = {}
+    for(let i=0; i<nums.length; i++){
+        const comp = target - nums[i]
+        if(comp in hashMap){
+            return [hashMap[comp], i]
+        }
+        hashMap[nums[i]]=i
+    }
+    return []
+}
+
+const nums = [2, 7, 11, 15];
+const target = 9;
+const nums1 = [2, 7, 1, 15];
+const target1 = 8;
+console.log(indicesTwoNumbers(nums, target)) //[0,1]
+console.log(indicesTwoNumbers(nums1, target1))//[1,2]
+
+/*23.Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.The overall run time complexity should be O(log (m+n)).
+Example 1:
+Input: nums1 = [1,3], nums2 = [2]
+Output: 2.00000 (HARD LEVEL)*/
+function returnMedian(arr1, arr2){
+   let newArr = [...arr1, ...arr2].sort((a,b)=>a-b)
+   let result = 0
+   for(let i=0; i < newArr.length; i++){
+    if(i === Math.floor(newArr.length/2)){
+        if(newArr.length%2===0){
+            result = newArr[i-1]+newArr[i]/2
+        } else{
+            result = newArr[i]
+        }
+        break
+    }
+   }
+    return result
+}
+console.log(returnMedian([1,3], [2]))// 2
+console.log(returnMedian([1,3], [10, 8]))//7
+console.log(returnMedian([1,3], [10, 7, 15,4]))//7.5
+/*22. Определить является ли строка палиндромо (последовательность символов которая одинаково чиатется в обоих направлениях*/
+
+/*23. Вывести n-е число Фибоначчи (ряд чисел, где кажде последующее является  суммой дву) */
+
