@@ -434,7 +434,32 @@ function returnMedian(arr1, arr2){
 console.log(returnMedian([1,3], [2]))// 2
 console.log(returnMedian([1,3], [10, 8]))//7
 console.log(returnMedian([1,3], [10, 7, 15,4]))//7.5
-/*22. Определить является ли строка палиндромо (последовательность символов которая одинаково чиатется в обоих направлениях*/
 
-/*23. Вывести n-е число Фибоначчи (ряд чисел, где кажде последующее является  суммой дву) */
+/*24.Given a string s, check if it can be constructed by taking a substring of it and appending multiple copies of the substring together. */
+function checkSubstring(str){
+    
+}
+
+/*24.Given an integer array nums of length n and an integer target, find three integers in nums such that the sum is closest to target.Return the sum of the three integers.You may assume that each input would have exactly one solution.
+Example 1:
+Input: nums = [-1,2,1,-4], target = 1
+Output: 2 */
+
+function sumClosest(nums,target){
+   
+}
+console.log(sumClosest([-1,2,1,-4],1))
+/*25. Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.Notice that the solution set must not contain duplicate triplets.
+Example 1:
+Input: nums = [-1,0,1,2,-1,-4]
+Output: [[-1,-1,2],[-1,0,1]]*/
+
+function returnSumZero(arr){
+    
+}
+
+
+/*. Определить является ли строка палиндромо (последовательность символов которая одинаково чиатется в обоих направлениях*/
+
+/*. Вывести n-е число Фибоначчи (ряд чисел, где кажде последующее является  суммой дву) */
 
