@@ -71,20 +71,49 @@ console.log (counter1.reset()); // 5
 console.log (counter1.decrement()); // 4
 
 /*5.Given an integer array arr and a mapping function fn, return a new array with a transformation applied to each element.The returned array should be created such that returnedArray[i] = fn(arr[i], i).Please solve it without the built-in Array.map method.*/
-// const fn =   function(){
+// const map = function(arr, fn) {
 //     let newArr =[];
 //     for(let i = 0; i<arr.length; i++){
-//         newArr = arr[i]+1
+//         newArr.push(fn(arr[i], i))
 //     }
 //     return newArr
-// }
+// };
 // let arr =[1,3,4]
 
 // const f3 = map(arr, fn())
-// console.log(f3)
+// console.log(f3)// -DONE
 
- /*Given an integer array arr and a mapping function fn, return a new array with a transformation applied to each element.
+/*6.Given an integer array arr and a filtering function fn, return a filtered array filteredArr.The fn function takes one or two arguments:arr[i] - number from the arr;i - index of arr[i]. filteredArr should only contain the elements from the arr for which the expression fn(arr[i], i) evaluates to a truthy value. A truthy value is a value where Boolean(value) returns true.Please solve it without the built-in Array.filter method.*/
+// const filter = function(arr, fn) {
+//     newArr = [];
+//     for(let i=0; i<arr.length; i++){
+//         if(fn(arr[i], i))
+//         newArr.push(arr[i])
+//     }
+//     return newArr;
+// };
 
-The returned array should be created such that returnedArray[i] = fn(arr[i], i).
+/*7.Given an integer array nums, a reducer function fn, and an initial value init, return the final result obtained by executing the fn function on each element of the array, sequentially, passing in the return value from the calculation on the preceding element.This result is achieved through the following operations: val = fn(init, nums[0]), val = fn(val, nums[1]), val = fn(val, nums[2]), ... until every element in the array has been processed. The ultimate value of val is then returned.If the length of the array is 0, the function should return init.Please solve it without using the built-in Array.reduce method. */
+// const reduce = function(nums, fn, init) {
+//     let sum = init
+//      for(let i = 0; i<nums.length; i++){
+//         sum = fn(sum,nums[i])
+//      }
+//      return sum
+//  };//-DONE
 
-Please solve it without the built-in Array.map method.*/
+ /*9.Write a function argumentsLength that returns the count of arguments passed to it.*/
+ const argumentsLength = function(...args) {
+    let newArr = [...args]
+        return newArr.length
+}
+console.log(argumentsLength(5))//1 - DONE
+
+/*12.Given two promises promise1 and promise2, return a new promise. promise1 and promise2 will both resolve with a number. The returned promise should resolve with the sum of the two numbers.*/
+const addTwoPromises = async function(promise1, promise2) {
+    let [result1,result2] = await Promise.all([promise1,promise2])
+    return result1 + result2
+};
+let promise1 = new Promise(resolve => setTimeout(() => resolve(2), 20));
+let promise2 = new Promise(resolve => setTimeout(() => resolve(5), 60))
+console.log(addTwoPromises(promise1,promise2))//7 - DONE
