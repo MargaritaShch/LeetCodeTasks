@@ -117,3 +117,42 @@ const addTwoPromises = async function(promise1, promise2) {
 let promise1 = new Promise(resolve => setTimeout(() => resolve(2), 20));
 let promise2 = new Promise(resolve => setTimeout(() => resolve(5), 60))
 console.log(addTwoPromises(promise1,promise2))//7 - DONE
+
+/*13.Дана функция fn, массив аргументов args и время ожидания t в миллисекундах. Верните функцию отмены cancelFn.После задержки в cancelTimeMs, вызовется возвращенная функция отмены cancelFn. setTimeout(cancelFn, cancelTimeMs).Изначально выполнение функции fn должно быть отложено на t миллисекунд.Если до истечения времени t функция cancelFn вызывается, она должна отменить отложенное выполнение fn. В противном случае, если cancelFn не вызывается в течение указанной задержки t, fn должна выполниться с предоставленными args в качестве аргументов.Input: fn = (x) => x * 5, args = [2], t = 20
+Output: [{"time": 20, "returned": 10}]
+Explanation: 
+const cancelTimeMs = 50;
+const cancelFn = cancellable((x) => x * 5, [2], 20);
+setTimeout(cancelFn, cancelTimeMs);
+The cancellation was scheduled to occur after a delay of cancelTimeMs (50ms), which happened after the execution of fn(2) at 20ms.*/
+const cancellable = function(fn, args, t) {
+    //Если до истечения времени t функция cancelFn вызывается, она должна отменить отложенное выполнение fn
+    function cancelFn(){
+        clearInterval(timer)
+    }
+   // выполнение функции fn должно быть отложено на t миллисекунд
+    let timer = setTimeout(()=>{
+    //если cancelFn не вызывается в течение указанной задержки t, fn должна выполниться с предоставленными args в качестве аргументов
+        fn(...args)
+    },t)
+    //Верните функцию отмены cancelFn
+    return cancelFn;
+}//7 - DONE
+
+/*14.Дана функция fn, массив аргументов args и интервал времени t. Верните функцию отмены cancelFn.После задержки в cancelTimeMs, вызовется возвращенная функция отмены cancelFn.
+setTimeout(cancelFn, cancelTimeMs)
+Функция fn должна быть вызвана с аргументами args сразу, а затем вызываться снова каждые t миллисекунд, пока cancelFn не будет вызвана в момент cancelTimeMs.*/
+const cancel = function(fn, args, t){
+    //Функция fn должна быть вызвана с аргументами args
+    fn(...args)
+    //функция отмены cancelFn
+    function cancelFn(){
+        clearInterval(timer)
+    }
+    //вызываться снова каждые t миллисекунд
+    let timer = setTInterval(()=>{
+        fn(...args);
+    },t)
+    //Верните функцию отмены cancelFn
+    return cancelFn;
+}
