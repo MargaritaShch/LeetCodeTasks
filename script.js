@@ -1,5 +1,3 @@
-
-
 /*1.Write a function createHelloWorld. It should return a new function that always returns "Hello World". */
 const createHelloWorld = function() {
     let args =['Hello', "World"];
@@ -11,7 +9,7 @@ const createHelloWorld = function() {
 };
 
 const f = createHelloWorld();
-    console.log(f()); // "Hello World"
+    console.log(f()); // "Hello World" - DONE
 
 /*2.Given an integer n, return a counter function. This counter function initially returns n and then returns 1 more than the previous value every subsequent time it is called (n, n + 1, n + 2, etc). */
 const createCounter = function(n) {
@@ -23,9 +21,9 @@ const createCounter = function(n) {
 };
 
 const counter = createCounter(10)
-console.log(counter())// 10
-console.log(counter()) // 11
-console.log(counter()) // 12
+console.log(counter())// 10 - DONE
+console.log(counter()) // 11 - DONE
+console.log(counter()) // 12 - DONE
 
 /*3.Write a function expect that helps developers test their code. It should take in any value val and return an object with the following two functions.toBe(val) accepts another value and returns true if the two values === each other. If they are not equal, it should throw an error "Not Equal". notToBe(val) accepts another value and returns true if the two values !== each other. If they are equal, it should throw an error "Equal". */
 const expect = function(val) {
@@ -50,8 +48,8 @@ const expect = function(val) {
     }; 
 };
 
-console.log(expect(5).toBe(5)); // true
-console.log(expect(5).notToBe(5)); // throws "Equal"
+console.log(expect(5).toBe(5)); // true - DONE
+console.log(expect(5).notToBe(5)); // throws "Equal" - ?
 
 /*4.Write a function createCounter. It should accept an initial integer init. It should return an object with three functions.The three functions are:
 increment() increases the current value by 1 and then returns it.
@@ -70,14 +68,13 @@ const createCounter1 = function(init) {
             count = init
             return count
         }
-    }
-    
+    }  
 };
 
 const counter1 = createCounter1(5)
-console.log(counter1.increment()); // 6
-console.log(counter1.reset()); // 5
-console.log(counter1.decrement()); // 4
+console.log(counter1.increment()); // 6 - DONE
+console.log(counter1.reset()); // 5 - DONE
+console.log(counter1.decrement()); // 4 - DONE
 
 /*5.Given an integer array arr and a mapping function fn, return a new array with a transformation applied to each element.The returned array should be created such that returnedArray[i] = fn(arr[i], i).Please solve it without the built-in Array.map method.*/
 const map = function(arr, fn) {
@@ -86,7 +83,7 @@ const map = function(arr, fn) {
          newArr.push(fn(arr[i],i))
     }
     return newArr;
-};
+}; //- DONE
 
 /*6.Given an integer array arr and a filtering function fn, return a filtered array filteredArr.
 The fn function takes one or two arguments:
@@ -101,7 +98,7 @@ const filter = function(arr, fn){
             return newArr.push(arr[i])
         }
     }
-}
+} //- DONE
 
 /*7. Given an integer array nums, a reducer function fn, and an initial value init, return a reduced array.
 A reduced array is created by applying the following operation: val = fn(init, nums[0]), val = fn(val, nums[1]), val = fn(val, nums[2]), ... until every element in the array has been processed. The final value of val is returned.If the length of the array is 0, it should return init. */
@@ -112,7 +109,7 @@ const reduce = function(nums, fn, init) {
            sum =fn(sum,nums[i])
     }
     return sum
-};
+}; // - DONE
 
 /*8.Given an array of functions [f1, f2, f3, ..., fn], return a new function fn that is the function composition of the array of functions. The function composition of [f(x), g(x), h(x)] is fn(x) = f(g(h(x))). The function composition of an empty list of functions is the identity function f(x) = x. You may assume each function in the array accepts one integer as input and returns one integer as output. */
 const compose = function(functions){
@@ -130,7 +127,7 @@ const compose = function(functions){
         }
         return result;
     }
-}
+} // - DONE
 
 /*9.Write a function argumentsLength that returns the count of arguments passed to it. */
 const argumentsLength = function(...args) {
@@ -143,8 +140,8 @@ const argumentsLength = function(...args) {
 
 let a = [5]
 let b = [1,2,3]
-console.log(argumentsLength(a))
-console.log(argumentsLength(b))
+console.log(argumentsLength(a))//1 - DONE
+console.log(argumentsLength(b))//3 - DONE
 
 /*10.Given a function fn, return a new function that is identical to the original function except that it ensures fn is called at most once.The first time the returned function is called, it should return the same result as fn.Every subsequent time it is called, it should return undefined. */
 const once = function(fn) {
@@ -162,25 +159,25 @@ const once = function(fn) {
             return undefined  
         }
     }
-}
+} //- DONE
 
 /*11.Given two promises promise1 and promise2, return a new promise. promise1 and promise2 will both resolve with a number. The returned promise should resolve with the sum of the two numbers.*/
 const addTwoPromises = async function(promise1, promise2) {
     const [val1, val2] = await Promise.all([promise1,promise2])
      return val1+val2    
- };
+ }; // - DONE
 
 /*12.Given a positive integer millis, write an asynchronous function that sleeps for millis milliseconds. It can resolve any value.*/
 async function sleep(millis) {
     await new Promise((resolve) =>setTimeout(resolve, millis))
-}
+} // - DONE
 
 /*13.Given an array arr and a function fn, return a sorted array sortedArr. You can assume fn only returns numbers and those numbers determine the sort order of sortedArr. sortedArray must be sorted in ascending order by fn output.
 You may assume that fn will never duplicate numbers for a given array. */
 var sortBy = function(arr, fn) {
     // с помощью slice() копируем массив. В sort -сортируем с помощью определения разницы определяем какой элемент будет первым 
     return arr.slice().sort((a,b)=>fn(a)-fn(b))
-  };
+  }; // - DONE
 
 /*14.Design a Calculator class. The class should provide the mathematical operations of addition, subtraction, multiplication, division, and exponentiation. It should also allow consecutive operations to be performed using method chaining. The Calculator class constructor should accept a number which serves as the initial value of result.Your Calculator class should have the following methods:
 add - This method adds the given number value to the result and returns the updated Calculator.
@@ -198,7 +195,6 @@ class Calculator {
 		this.value+=value
         return this
 	}
-
 
 	subtract(value){
 		this.value-=value
@@ -228,9 +224,9 @@ class Calculator {
 	}
 }
 
-const myCalculator = new Calculator(0); // Initialize with an initial value
+const myCalculator = new Calculator(0); // Initialize with an initial value 
 const result = myCalculator.add(5).multiply(3).divide(2).power(2).getResult();
-console.log(result);// Result = 56.25
+console.log(result);// Result = 56.25 - DONE
 
 /*15.Given an object or an array, return if it is empty.An empty object contains no key-value pairs.An empty array contains no elements. */
 var isEmpty = function(obj) {
@@ -246,8 +242,8 @@ var isEmpty = function(obj) {
 
 let obj1 = [null, false, 0];
 let obj2 ={}
-console.log(isEmpty(obj1))
-console.log(isEmpty(obj2))
+console.log(isEmpty(obj1))//false - DONE
+console.log(isEmpty(obj2))//true - DONE
 
 /*16.Зареверсить слова в строке, но оставить позицию этих слова на месте */
 function revrseString(str){
@@ -258,7 +254,7 @@ function revrseString(str){
     return reversWord.join(' ')
 }
 
-console.log(revrseString('well done'))//Result = "llew enod"
+console.log(revrseString('well done'))//Result = "llew enod" - DONE
 
 /*17. Задача на сортировку людей по росту. Есть ф-я которая принмиаетя в себя два параметра имена и рост.Сопоставить имена и рост и по возрастанию построить*/
 
@@ -273,10 +269,9 @@ const sortingeople =(arr1,arr2)=>{
 
 let names = ['Mary',"John",'Emma']
 let height=[180, 165,170]
-console.log(sortingeople(names,height))
+console.log(sortingeople(names,height))//- DONE
 
 /*18.Ф-я принимает один аргумент(число). Это число положительное, нужно найти сумму всех чисел от одного до этого числа которые деляться на 3,5,7 */
-
 const sum =(num)=>{
     let arr =[]
     let sumArr =0
@@ -289,7 +284,7 @@ const sum =(num)=>{
     return sumArr
 }
 
-console.log(sum(9))
+console.log(sum(9))// 30 - DONE
 
 /*19.Есть массив из строк каждая строка это массив из строк, каждая строка это предложение. Найти предлодение у которого самое больщое количество слов */
 const maxWSentanceCount =(arr)=>{
@@ -320,7 +315,7 @@ const sentences = [
     'The greatest glory in living lies not in never falling, but in rising every time we fall.'
   ];
 
-console.log(maxWSentanceCount(sentences))
+console.log(maxWSentanceCount(sentences))// It is not the strongest of the species that survive, nor the most intelligent, but the one most responsive to change.- DONE
 
 /*20. Найти самый длинный префикс среди заданых строк: line, listen, library -> li*/
 //1. Вариант: сравнить строки попарно
@@ -339,7 +334,7 @@ const getCommonPrefix=(prefix, str2)=>{
        result += prefix[i]
     }
     return result;
-}
+}// - DONE
 
 function getLongestPrefix(arr){
     //проинициализуеруем первой строкой для массива, т.е на первом шаге решаем что префикс это первое слово в массиве 
@@ -353,8 +348,8 @@ function getLongestPrefix(arr){
 }
 const arrLine = ["line","listen", "library"]
 const arrAlph =['abc345',"abcojpohp", "abcdrw", 'abcpoiu']
-console.log(getLongestPrefix(arrLine))//Result = li
-console.log(getLongestPrefix(arrAlph))//Result = abc
+console.log(getLongestPrefix(arrLine))//Result = li - DONE
+console.log(getLongestPrefix(arrAlph))//Result = abc - DONE
 //оптимальное решение для этой же задачи
 function getLongestPrefix2(arr){
    //сначала отсортируем массив
@@ -374,8 +369,8 @@ function getLongestPrefix2(arr){
 
 const arrLine2 = ["line","listen", "library"]
 const arrAlph2 =['abc345',"abcojpohp", "abcdrw", 'abcpoiu']
-console.log(getLongestPrefix2(arrLine2))//Result = li
-console.log(getLongestPrefix2(arrAlph2))//Result = abc
+console.log(getLongestPrefix2(arrLine2))//Result = li - DONE
+console.log(getLongestPrefix2(arrAlph2))//Result = abc - DONE
 
 /*21.Определить являются ли строки анаграммой (состоят из одних и тех же символов): listen -> silent (EASY LEVEL)*/ 
 function isAnagramm(str1,str2){
@@ -385,8 +380,8 @@ function isAnagramm(str1,str2){
     return constStr1 === constStr2
 }
 
-console.log(isAnagramm('listen',"silent"))//Result = true
-console.log(isAnagramm('listen',"silenthill"))//Result = false
+console.log(isAnagramm('listen',"silent"))//Result = true - DONE
+console.log(isAnagramm('listen',"silenthill"))//Result = false - DONE
 
 /*22.	Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.You may assume that each input would have exactly one solution, and you may not use the same element twice.You can return the answer in any order.
 Example 1:
@@ -409,8 +404,8 @@ const nums = [2, 7, 11, 15];
 const target = 9;
 const nums1 = [2, 7, 1, 15];
 const target1 = 8;
-console.log(indicesTwoNumbers(nums, target)) //[0,1]
-console.log(indicesTwoNumbers(nums1, target1))//[1,2]
+console.log(indicesTwoNumbers(nums, target)) //[0,1] - DONE
+console.log(indicesTwoNumbers(nums1, target1))//[1,2] - DONE
 
 /*23.Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.The overall run time complexity should be O(log (m+n)).
 Example 1:
@@ -431,35 +426,30 @@ function returnMedian(arr1, arr2){
    }
     return result
 }
-console.log(returnMedian([1,3], [2]))// 2
-console.log(returnMedian([1,3], [10, 8]))//7
-console.log(returnMedian([1,3], [10, 7, 15,4]))//7.5
+console.log(returnMedian([1,3], [2]))// 2 - DONE
+console.log(returnMedian([1,3], [10, 8]))//7 - DONE
+console.log(returnMedian([1,3], [10, 7, 15,4]))//7.5 - DONE
 
-/*24.Given a string s, check if it can be constructed by taking a substring of it and appending multiple copies of the substring together. */
-function checkSubstring(str){
-    
-}
+/*25.Given an integer n, return true if it is a power of two. Otherwise, return false.An integer n is a power of two, if there exists an integer x such that n == 2x.*/
+const isPowerOfTwo = function(n) {
+    let x = 0;
+    while(2**x < n){
+        x++
+    }
+    return  2**x === n
+};
 
-/*24.Given an integer array nums of length n and an integer target, find three integers in nums such that the sum is closest to target.Return the sum of the three integers.You may assume that each input would have exactly one solution.
-Example 1:
-Input: nums = [-1,2,1,-4], target = 1
-Output: 2 */
+console.log(isPowerOfTwo(16))//true - DONE
+console.log(isPowerOfTwo(3))//false - DONE
+console.log(isPowerOfTwo(1))//true - DONE
 
-function sumClosest(nums,target){
-   
-}
-console.log(sumClosest([-1,2,1,-4],1))
-/*25. Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.Notice that the solution set must not contain duplicate triplets.
-Example 1:
-Input: nums = [-1,0,1,2,-1,-4]
-Output: [[-1,-1,2],[-1,0,1]]*/
+/*26. The Fibonacci numbers, commonly denoted F(n) form a sequence, called the Fibonacci sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1. That is,F(0) = 0, F(1) = 1
+F(n) = F(n - 1) + F(n - 2), for n > 1.
+Given n, calculate F(n).*/
 
-function returnSumZero(arr){
-    
-}
+const fib = function(n) {
+    return n <=1 ? n : fib(n-1) + fib(n-2)   
+};// - DONE
 
-
-/*. Определить является ли строка палиндромо (последовательность символов которая одинаково чиатется в обоих направлениях*/
-
-/*. Вывести n-е число Фибоначчи (ряд чисел, где кажде последующее является  суммой дву) */
+ 
 
