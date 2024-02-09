@@ -1,3 +1,5 @@
+
+
 /*1.Write a function createHelloWorld. It should return a new function that always returns "Hello World". */
 const createHelloWorld = function() {
     let args =['Hello', "World"];
@@ -432,11 +434,7 @@ console.log(returnMedian([1,3], [10, 7, 15,4]))//7.5 - DONE
 
 /*25.Given an integer n, return true if it is a power of two. Otherwise, return false.An integer n is a power of two, if there exists an integer x such that n == 2x.*/
 const isPowerOfTwo = function(n) {
-    let x = 0;
-    while(2**x < n){
-        x++
-    }
-    return  2**x === n
+
 };
 
 console.log(isPowerOfTwo(16))//true - DONE
@@ -451,5 +449,77 @@ const fib = function(n) {
     return n <=1 ? n : fib(n-1) + fib(n-2)   
 };// - DONE
 
- 
+//27.Search JS object. Write a function called contains that searches for a value in a nested object. It returns true if the object contains that value
+var nestedObject = {
+    data: {
+        info: {
+            stuff: {
+                thing: {
+                    moreStuff: {
+                        magicNumber: 44,
+                        something: 'foo2'
+                    }
+                }
+            }
+        }
+    }
+}
+function contains(obj,value){
+    for(let key in obj){
+        if(typeof obj[key] === 'object'){
+            if(contains(obj[key], value)){
+                return true
+            }
+        } else if(obj[key] === value){
+            return true
+        }
+    }
+    return false
+}
 
+contains(nestedObject, 44); // true - DONE
+contains(nestedObject, "foo");//false - DONE
+console.log(contains(nestedObject, 44));
+console.log(contains(nestedObject, "foo"))
+
+ //28. Сумма чисел до N: Напиши рекурсивную функцию для вычисления суммы всех целых чисел от 1 до N.
+ function sumNums(num){
+    return num === 1 ? num : num + sumNums(num-1) 
+ }
+
+
+/*29. Подсчет символов в строке: Напиши рекурсивную функцию для подсчета количества определенного символа в строке. функция должна принимать два параметра -- строку и символ, который надо считать*/
+//ЦИКЛ
+function getSymbols(str,symbol){
+    let newArr = str.split('')
+    console.log(newArr)
+    let symbolsArr = []
+    for(let i =0; i<newArr.length; i++){
+        if(newArr[i] === symbol){
+            symbolsArr.push(symbol)
+        }
+    }
+    return symbolsArr.length
+}
+
+const testString = "Hello, world!";
+const testCharacter = "o";
+console.log(getSymbols(testString,testCharacter))//2 -DONE
+const testString2 = "Hello, world!";
+const testCharacter2 = "z";
+console.log(getSymbols(testString2,testCharacter2))//0 - DONE
+//РЕКУРСИЯ
+function getSymbols2(str,symbol){
+    if(str.length === 0){
+        return 0
+    }
+    let count = 0;
+    if(str[0] === symbol){
+        count++
+    }
+    return count + getSymbols2(str.slice(1),symbol)
+}
+
+const testString1 = "Hello, world!";
+const testCharacter1 = "o";
+console.log(getSymbols2(testString1,testCharacter1))//2 -DONE
