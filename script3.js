@@ -41,7 +41,7 @@ console.log(reverse(21)); //12 - DONE
 const isPalindrome = function (x) {
   let num = x.toString().split("").reverse().join("");
   let result = +num;
-  return x === result ? true : false;
+  return x === result;
 };
 
 console.log(isPalindrome(121));//true - DONE
