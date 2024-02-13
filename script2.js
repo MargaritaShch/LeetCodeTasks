@@ -156,3 +156,60 @@ const cancel = function(fn, args, t){
     //Верните функцию отмены cancelFn
     return cancelFn;
 }
+
+/*15.Given an object or an array, return if it is empty.An empty object contains no key-value pairs.An empty array contains no elements.You may assume the object or array is the output of JSON.parse.*/ 
+var isEmpty = function(obj) {
+    for(let value in obj){
+        if(obj.hasOwnProperty(value)){
+            return false
+        } 
+    }
+    return true
+}
+  
+
+let obj = {"x": 5, "y": 42}
+console.log(isEmpty(obj))//false - DONE
+let obj1 = {}
+console.log(isEmpty(obj1))//true - DONE
+let obj2 = [null, false, 0]
+console.log(isEmpty(obj2))//false - DONE
+
+/*16.Given an array arr and a chunk size size, return a chunked array. A chunked array contains the original elements in arr, but consists of subarrays each of length size. The length of the last subarray may be less than size if arr.length is not evenly divisible by size.You may assume the array is the output of JSON.parse. In other words, it is valid JSON.Please solve it without using lodash's _.chunk function.*/
+const chunk = function(arr, size) {
+    let newArr = []
+    //шаг +size
+    for(let i = 0; i<arr.length; i+=size){
+        let subArr = arr.slice(i, i+size)
+        newArr.push(subArr)
+   }
+   return newArr
+};
+
+let arr = [1,2,3,4,5] 
+let size = 1
+console.log(chunk(arr,size))//[[1],[2],[3],[4],[5]] -DONE
+let arr1 = [1,9,6,3,2] 
+let size1 = 3
+console.log(chunk(arr,size))//[[1,9,6],[3,2]] -DONE
+let arr2 = [8,5,3,2,6] 
+let size2 = 6
+console.log(chunk(arr,size))//[[8,5,3,2,6]] -DONE
+
+/*17.Write code that enhances all arrays such that you can call the array.last() method on any array and it will return the last element. If there are no elements in the array, it should return -1.
+You may assume the array is the output of JSON.parse.*/
+
+Array.prototype.last = function() {
+    if(this.length === 0){
+        return -1
+    }else{
+        return this[this.length-1]
+    }
+};//-DONE
+
+/*18.Given an array arr and a function fn, return a sorted array sortedArr. You can assume fn only returns numbers and those numbers determine the sort order of sortedArr. sortedArray must be sorted in ascending order by fn output.You may assume that fn will never duplicate numbers for a given array.*/ 
+const sortBy = function(arr, fn) {
+   return arr.sort((a,b)=>fn(a)-fn(b))
+};//-DONE
+
+
