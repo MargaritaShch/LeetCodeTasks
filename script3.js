@@ -44,16 +44,73 @@ const isPalindrome = function (x) {
   return x === result;
 };
 
-console.log(isPalindrome(121));//true - DONE
-console.log(isPalindrome(-121));//false - DONE
+console.log(isPalindrome(121)); //true - DONE
+console.log(isPalindrome(-121)); //false - DONE
 // console.log(isPalindrome(10));//false - DONE
 
 /*5.You are given the heads of two sorted linked lists list1 and list2.Merge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists.Return the head of the merged linked list.*/
-const mergeTwoLists = function(list1, list2) {
-    let newArr = list1.concat(list2).sort()
-    return newArr
+const mergeTwoLists = function (list1, list2) {
+  let newArr = list1.concat(list2).sort();
+  return newArr;
 };
 
-console.log(mergeTwoLists([1,2,4],[1,3,4]))// [1, 1, 2, 3, 4, 4] -DONE
-console.log(mergeTwoLists([],[]))// [] -DONE
+console.log(mergeTwoLists([1, 2, 4], [1, 3, 4])); // [1, 1, 2, 3, 4, 4] -DONE
+console.log(mergeTwoLists([], [])); // [] -DONE
 
+/*6.Given an array nums of size n, return the majority element.The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.*/
+const majorityElement = function (nums) {
+  let filterArr1 = [];
+  let filterArr2 = [];
+  for (let i = 0; i < nums.length; i++) {
+    filterArr1.push(nums[0]);
+    for (let k = 0; k < filterArr1.length; k++) {
+      if (nums[i] !== filterArr1[k]) {
+        filterArr2.push(nums[i]);
+      }
+      if (filterArr1.length > filterArr2.length) {
+        return filterArr1[k];
+      }
+    }
+  }
+};
+
+console.log(majorityElement([3, 2, 3])); //3 - DONE
+console.log(majorityElement([2, 2, 1, 1, 1, 2, 2])); //2-DONE
+
+/*7.Given two strings s and t, return true if t is an anagram of s, and false otherwise.An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.*/
+const isAnagram = function(s, t) {
+    let s2 = s.split("").sort().join("")
+    let t2 = t.split("").sort().join("")
+
+    return s2 === t2
+};
+
+console.log(isAnagram("anagram","nagaram"))//true - DONE
+console.log(isAnagram("rat","car"))//false - DONE
+
+/*8.You are climbing a staircase. It takes n steps to reach the top.Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?*/
+const climbStairs = function(n) {
+  return n ===1 ? 1 : 1 + climbStairs(n-1)
+};
+
+console.log(climbStairs(2))//2 - DONE
+console.log(climbStairs(3))//3 - DONE
+
+/*9.Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.*/
+const strStr = function(haystack, needle) {
+    return haystack.indexOf(needle)   
+};
+
+console.log(strStr( "sadbutsad", "sad"))//0 - DONE
+console.log(strStr( "leetcode", "leeto"))//-1-DONE
+
+/*10.Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.Consider the number of unique elements of nums to be k, to get accepted, you need to do the following things:Change the array nums such that the first k elements of nums contain the unique elements in the order they were present in nums initially. The remaining elements of nums are not important as well as the size of nums.
+Return k.*/
+const removeDuplicates = function(nums) {
+    const uniqNums = new Set(nums)
+    console.log(uniqNums)
+    return Array.from(uniqNums)
+};
+
+console.log(removeDuplicates([1,1,2]))//[1, 2] -DONE
+console.log(removeDuplicates([0,0,1,1,1,2,2,3,3,4]))//[0, 1, 2, 3, 4] - DONE
