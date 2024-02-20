@@ -59,19 +59,16 @@ console.log(mergeTwoLists([], [])); // [] -DONE
 
 /*6.Given an array nums of size n, return the majority element.The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.*/
 const majorityElement = function (nums) {
-  let filterArr1 = [];
-  let filterArr2 = [];
-  for (let i = 0; i < nums.length; i++) {
-    filterArr1.push(nums[0]);
-    for (let k = 0; k < filterArr1.length; k++) {
-      if (nums[i] !== filterArr1[k]) {
-        filterArr2.push(nums[i]);
-      }
-      if (filterArr1.length > filterArr2.length) {
-        return filterArr1[k];
-      }
+  //TASK:The majority element is the element that appears more than ⌊n / 2⌋
+  let medianLength = Math.floor(nums.length /2)
+  let n = 0
+  for(let num of nums){
+    // MDN:It only expects the this value to have a length property and integer-keyed properties.
+    if(nums.includes(num, medianLength)){
+      n = num 
     }
   }
+  return n;
 };
 
 console.log(majorityElement([3, 2, 3])); //3 - DONE
@@ -114,3 +111,43 @@ const removeDuplicates = function(nums) {
 
 console.log(removeDuplicates([1,1,2]))//[1, 2] -DONE
 console.log(removeDuplicates([0,0,1,1,1,2,2,3,3,4]))//[0, 1, 2, 3, 4] - DONE
+
+/*11.Write a function to find the longest common prefix string amongst an array of strings.If there is no common prefix, return an empty string "".*/
+const longestCommonPrefix = function(strs) {
+  strs.sort()
+  const minLine = Math.min(strs[0].length, strs[strs.length-1].length)
+  let i = 0
+  while(i<minLine && strs[0][i] === strs[strs.length-1][i]){
+      i++
+  }
+  return strs[0].substring(0,i)
+}
+
+let strs = ["flower","flow","flight"]
+console.log(longestCommonPrefix(strs))//fl - DONE
+let strs1 = ["dog","racecar","car"]
+console.log(longestCommonPrefix(strs1))// "" - DONE
+
+/*12.The judge will test your solution with the following code.If all assertions pass, then your solution will be accepted.*/
+const removeElement = function(nums, val) {
+    for(let i =0; i <nums.length; i++){
+      if(nums[i]===val){
+        nums.splice(i,1)
+        //сдвиг назад без пропусков
+        i--
+      }
+    }
+    return nums.length
+};
+
+let nums = [3,2,2,3] 
+let val = 3
+console.log(removeElement(nums,val))//2 -DONE
+
+let nums1 = [0,1,2,2,3,0,4,2] 
+let val1 = 2
+console.log(removeElement(nums1,val1))// 5 - DONE
+
+
+
+
