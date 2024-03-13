@@ -210,3 +210,62 @@ const numUniqueEmails = function(emails) {
 console.log(numUniqueEmails(["test.email+alex@leetcode.com","test.e.mail+bob.cathy@leetcode.com","testemail+david@lee.tcode.com"]))
 console.log(numUniqueEmails(["a@leetcode.com","b@leetcode.com","c@leetcode.com"]))
 
+/*17.Given an integer array nums, return the third distinct maximum number in this array. If the third maximum does not exist, return the maximum number.*/
+const thirdMax = function (nums) {
+  if (nums.length < 3) {
+    return Math.max(...nums);
+  }
+  let newArr = nums.slice(0, 3);
+  console.log(newArr);
+  for (let k = 0; k < newArr.length; k++) {
+    if (Math.max(newArr[k])) {
+      return k + 1;
+    }
+  }
+};
+
+console.log(thirdMax([3, 2, 1])); //1 - DONE
+console.log(thirdMax([1, 2])); //2 - DONE
+console.log(thirdMax([2, 2, 3, 1])); //3 - DONE
+console.log(thirdMax([1, 1, 2])); //1-??
+
+/*18.A sentence is a list of words that are separated by a single space with no leading or trailing spaces. Each word consists of lowercase and uppercase English letters.A sentence can be shuffled by appending the 1-indexed word position to each word then rearranging the words in the sentence.For example, the sentence "This is a sentence" can be shuffled as "sentence4 a3 is2 This1" or "is2 sentence4 This1 a3".Given a shuffled sentence s containing no more than 9 words, reconstruct and return the original sentence.*/
+const sortSentence = function (s) {
+  let arr = s.split(" ");
+  let newArr = [];
+  let result = [];
+  for (let i = 0; i < arr.length; i++) {
+    newArr.push(arr[i].split("").reverse().join(""));
+    let arr1 = newArr.sort();
+
+    for (let k = 0; k < arr1.length; k++) {
+      result.push(arr1[k].split("").join(""));
+      let arr2 = result.sort();
+      console.log(arr2);
+    }
+  }
+};
+
+console.log(sortSentence("is2 sentence4 This1 a3"));
+console.log(sortSentence("Myself2 Me1 I4 and3"));
+
+//*19.Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well. */
+
+const deleteDuplicates = function (head) {
+  let cur = head;
+  //пока текущий и следующий узлы есть
+  while(cur && cur.next){
+    //если значение текущего и следующего узла равны
+     if(cur.val === cur.next.val){
+      //пропускаем узел приравнивая текущий и следующий друг к другу
+         cur.next = cur.next.next
+     } else{
+      //если нет записываем след узел
+         cur = cur.next
+     }
+ }
+  return head
+};
+console.log(deleteDuplicates([1, 1, 2]));//[1,2] - DONE
+console.log(deleteDuplicates([1, 1, 2, 3, 3]));//[1,2,3] - DONE
+
