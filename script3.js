@@ -165,48 +165,137 @@ let jewels = "aA";
 let stones = "aAAbbbb";
 console.log(numJewelsInStones(jewels, stones)); //3 - DONE
 
-
 /*14.Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.*/
 
-const containsDuplicate = function(nums){
-  let uniqNum = new Set(nums)
-  console.log(uniqNum)
-  let newArr = Array.from(uniqNum)
-  if(newArr.length === nums.length ){
-    return false
-  } else{
-    return true
-  } 
-}
+const containsDuplicate = function (nums) {
+  let uniqNum = new Set(nums);
+  console.log(uniqNum);
+  let newArr = Array.from(uniqNum);
+  if (newArr.length === nums.length) {
+    return false;
+  } else {
+    return true;
+  }
+};
 
-console.log(containsDuplicate([1,2,3,1]));//true -DONE
-console.log(containsDuplicate([1,2,3,4]));//false - DONE
-console.log(containsDuplicate([1,1,1,3,3,4,3,2,4,2]));//true - DONE
+console.log(containsDuplicate([1, 2, 3, 1])); //true -DONE
+console.log(containsDuplicate([1, 2, 3, 4])); //false - DONE
+console.log(containsDuplicate([1, 1, 1, 3, 3, 4, 3, 2, 4, 2])); //true - DONE
 
 /*15.Given a string s consisting of words and spaces, return the length of the last word in the string.A word is a maximal substring consisting of non-space characters only.*/
-const lengthOfLastWord = function(s) {
+const lengthOfLastWord = function (s) {
   let arr = s.split(" ");
-  let newArr = arr.filter((word)=>Math.max(word.length))
-  for(let i =0; i<newArr.length; i++){
-      result = Math.max(newArr[i].length)     
+  let newArr = arr.filter((word) => Math.max(word.length));
+  for (let i = 0; i < newArr.length; i++) {
+    result = Math.max(newArr[i].length);
   }
-  return result
-}
-  
-console.log(lengthOfLastWord("Hello World"))//5 -DONE
-console.log(lengthOfLastWord("   fly me   to   the moon  "))//4-DONE
-console.log(lengthOfLastWord("luffy is still joyboy"))//6 - DONE
+  return result;
+};
+
+console.log(lengthOfLastWord("Hello World")); //5 -DONE
+console.log(lengthOfLastWord("   fly me   to   the moon  ")); //4-DONE
+console.log(lengthOfLastWord("luffy is still joyboy")); //6 - DONE
 
 /*16.Every valid email consists of a local name and a domain name, separated by the '@' sign. Besides lowercase letters, the email may contain one or more '.' or '+'.*/
-const numUniqueEmails = function(emails) {
-  let arr = []
-    for(let i=0; i<emails.length; i++){
-      let exception = emails[i].includes("+")
-      console.log(emails[i].slice(emails.indexOf(exception),emails.indexOf("@"))) 
-    } 
-    return arr
-}
+const numUniqueEmails = function (emails) {
+  let arr = [];
+  for (let i = 0; i < emails.length; i++) {
+    let exception = emails[i].includes("+");
+    console.log(
+      emails[i].slice(emails.indexOf(exception), emails.indexOf("@"))
+    );
+  }
+  return arr;
+};
 
-console.log(numUniqueEmails(["test.email+alex@leetcode.com","test.e.mail+bob.cathy@leetcode.com","testemail+david@lee.tcode.com"]))
-console.log(numUniqueEmails(["a@leetcode.com","b@leetcode.com","c@leetcode.com"]))
+console.log(
+  numUniqueEmails([
+    "test.email+alex@leetcode.com",
+    "test.e.mail+bob.cathy@leetcode.com",
+    "testemail+david@lee.tcode.com",
+  ])
+);
+console.log(
+  numUniqueEmails(["a@leetcode.com", "b@leetcode.com", "c@leetcode.com"])
+);
 
+/*17.Given an integer array nums, return the third distinct maximum number in this array. If the third maximum does not exist, return the maximum number.*/
+const thirdMax = function (nums) {
+  if (nums.length < 3) {
+    return Math.max(...nums);
+  }
+  let newArr = nums.slice(0, 3);
+  console.log(newArr);
+  for (let k = 0; k < newArr.length; k++) {
+    if (Math.max(newArr[k])) {
+      return k + 1;
+    }
+  }
+};
+
+console.log(thirdMax([3, 2, 1])); //1 - DONE
+console.log(thirdMax([1, 2])); //2 - DONE
+console.log(thirdMax([2, 2, 3, 1])); //3 - DONE
+console.log(thirdMax([1, 1, 2])); //1-??
+
+/*18.A sentence is a list of words that are separated by a single space with no leading or trailing spaces. Each word consists of lowercase and uppercase English letters.A sentence can be shuffled by appending the 1-indexed word position to each word then rearranging the words in the sentence.For example, the sentence "This is a sentence" can be shuffled as "sentence4 a3 is2 This1" or "is2 sentence4 This1 a3".Given a shuffled sentence s containing no more than 9 words, reconstruct and return the original sentence.*/
+const sortSentence = function (s) {
+  let arr = s.split(" ");
+  let newArr = [];
+  let result = [];
+  for (let i = 0; i < arr.length; i++) {
+    newArr.push(arr[i].split("").reverse().join(""));
+    let arr1 = newArr.sort();
+
+    for (let k = 0; k < arr1.length; k++) {
+      result.push(arr1[k].split("").join(""));
+      let arr2 = result.sort();
+      console.log(arr2);
+    }
+  }
+};
+
+console.log(sortSentence("is2 sentence4 This1 a3"));
+console.log(sortSentence("Myself2 Me1 I4 and3"));
+
+//*19.Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well. */
+const deleteDuplicates = function (head) {
+  let cur = head;
+  //пока текущий и следующий узлы есть
+  while(cur && cur.next){
+    //если значение текущего и следующего узла равны
+     if(cur.val === cur.next.val){
+      //пропускаем узел приравнивая текущий и следующий друг к другу
+         cur.next = cur.next.next
+     } else{
+      //если нет записываем след узел
+         cur = cur.next
+     }
+ }
+  return head
+};
+console.log(deleteDuplicates([1, 1, 2]));
+console.log(deleteDuplicates([1, 1, 2, 3, 3]));
+
+/*20.You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's.
+Increment the large integer by one and return the resulting array of digits.*/
+const plusOne = function(digits) {
+    for(let i = digits.length-1; i>=0; i--){
+      if(digits[i]<9){
+        digits[i]++
+        return digits
+      }else{
+        digits[i]=0
+      }
+    }
+    digits.unshift(1);
+    return digits
+};
+
+console.log(plusOne([1,2,3]))// 124 - DONE
+console.log(plusOne([4,3,2,1]))// 4322 - DONE
+console.log(plusOne([9]))// 10 - DONE
+
+
+
+//100 Leetcode challenge: Task 17-19

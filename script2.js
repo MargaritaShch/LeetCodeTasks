@@ -7,7 +7,6 @@ const createHelloWorld = function() {
     }
 };
 
-
 const f = createHelloWorld();
 console.log( f()); // "Hello World" - DONE
 
