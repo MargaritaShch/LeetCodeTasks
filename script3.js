@@ -296,6 +296,34 @@ console.log(plusOne([1,2,3]))// 124 - DONE
 console.log(plusOne([4,3,2,1]))// 4322 - DONE
 console.log(plusOne([9]))// 10 - DONE
 
+/*21.Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+You must write an algorithm with O(log n) runtime complexity.*/
+//O(log n) - бинарный поиск
+const searchInsert = function(nums, target) {
+  //нулевой индекс
+    let start = 0
+    //последний индекс
+    let end = nums.length-1
+    //выполняем функцию пока targer находится между start и end
+    while(start<=end){
+      //середина массива
+      let median = Math.floor((start+end)/2)
+      //если серидина равно=а target возвращаем позицию
+      if(nums[median] === target) return median;
+      //если серидина больше target 
+      if(nums[median]>target){
+        //ищем в левой стороне
+        end = median-1
+      }
+      //если серидина меньше target ищем в правой стороне
+      else{
+        start= median +1
+      }
+    }
+    return end+1
+};
 
-
-//100 Leetcode challenge: Task 17-19
+console.log(searchInsert([1,3,5,6], 5))//2 - DONE
+console.log(searchInsert([1,3,5,6], 2))//1 - DONE
+console.log(searchInsert([1,3,5,6], 7))//4 - DONE
+//100 Leetcode challenge: Task 21
