@@ -326,4 +326,35 @@ const searchInsert = function(nums, target) {
 console.log(searchInsert([1,3,5,6], 5))//2 - DONE
 console.log(searchInsert([1,3,5,6], 2))//1 - DONE
 console.log(searchInsert([1,3,5,6], 7))//4 - DONE
+
+/*22.Write an algorithm to determine if a number n is happy.A happy number is a number defined by the following process:
+Starting with any positive integer, replace the number by the sum of the squares of its digits.
+Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.
+Those numbers for which this process ends in 1 are happy.Return true if n is a happy number, and false if not.*/
+const isHappy = function(num) {
+  //хранение значений
+  let hash = {}
+  //пока значение не равно 1 и не втсречалось в d hash
+  while(num !==1 && !hash[num]){
+    //уже было
+    hash[num] =true
+    //получить getPow из текущего числа
+    num = getPow(num)
+  }
+  //если число счастливое возврашаем true, если нет false
+  return num === 1
+};
+
+function getPow(n){
+  let str = String(n).split("")
+    let sum =0
+    for(let i=0; i<str.length; i++){
+      sum += Math.pow(Number(str[i]),2)
+    }
+    return sum
+}
+
+console.log(isHappy(19))//true - DONE
+console.log(isHappy(2))//false - DONE
+console.log(isHappy(7))//true - DONE
 //100 Leetcode challenge: Task 21
