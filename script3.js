@@ -262,99 +262,142 @@ console.log(sortSentence("Myself2 Me1 I4 and3"));
 const deleteDuplicates = function (head) {
   let cur = head;
   //пока текущий и следующий узлы есть
-  while(cur && cur.next){
+  while (cur && cur.next) {
     //если значение текущего и следующего узла равны
-     if(cur.val === cur.next.val){
+    if (cur.val === cur.next.val) {
       //пропускаем узел приравнивая текущий и следующий друг к другу
-         cur.next = cur.next.next
-     } else{
+      cur.next = cur.next.next;
+    } else {
       //если нет записываем след узел
-         cur = cur.next
-     }
- }
-  return head
+      cur = cur.next;
+    }
+  }
+  return head;
 };
 console.log(deleteDuplicates([1, 1, 2]));
 console.log(deleteDuplicates([1, 1, 2, 3, 3]));
 
 /*20.You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's.
 Increment the large integer by one and retu rn the resulting array of digits.*/
-const plusOne = function(digits) {
-    for(let i = digits.length-1; i>=0; i--){
-      if(digits[i]<9){
-        digits[i]++
-        return digits
-      }else{
-        digits[i]=0
-      }
+const plusOne = function (digits) {
+  for (let i = digits.length - 1; i >= 0; i--) {
+    if (digits[i] < 9) {
+      digits[i]++;
+      return digits;
+    } else {
+      digits[i] = 0;
     }
-    digits.unshift(1);
-    return digits
+  }
+  digits.unshift(1);
+  return digits;
 };
 
-console.log(plusOne([1,2,3]))// 124 - DONE
-console.log(plusOne([4,3,2,1]))// 4322 - DONE
-console.log(plusOne([9]))// 10 - DONE
+console.log(plusOne([1, 2, 3])); // 124 - DONE
+console.log(plusOne([4, 3, 2, 1])); // 4322 - DONE
+console.log(plusOne([9])); // 10 - DONE
 
 /*21.Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
 You must write an algorithm with O(log n) runtime complexity.*/
 //O(log n) - бинарный поиск
-const searchInsert = function(nums, target) {
+const searchInsert = function (nums, target) {
   //нулевой индекс
-    let start = 0
-    //последний индекс
-    let end = nums.length-1
-    //выполняем функцию пока targer находится между start и end
-    while(start<=end){
-      //середина массива
-      let median = Math.floor((start+end)/2)
-      //если серидина равно=а target возвращаем позицию
-      if(nums[median] === target) return median;
-      //если серидина больше target 
-      if(nums[median]>target){
-        //ищем в левой стороне
-        end = median-1
-      }
-      //если серидина меньше target ищем в правой стороне
-      else{
-        start= median +1
-      }
+  let start = 0;
+  //последний индекс
+  let end = nums.length - 1;
+  //выполняем функцию пока targer находится между start и end
+  while (start <= end) {
+    //середина массива
+    let median = Math.floor((start + end) / 2);
+    //если серидина равно=а target возвращаем позицию
+    if (nums[median] === target) return median;
+    //если серидина больше target
+    if (nums[median] > target) {
+      //ищем в левой стороне
+      end = median - 1;
     }
-    return end+1
+    //если серидина меньше target ищем в правой стороне
+    else {
+      start = median + 1;
+    }
+  }
+  return end + 1;
 };
 
-console.log(searchInsert([1,3,5,6], 5))//2 - DONE
-console.log(searchInsert([1,3,5,6], 2))//1 - DONE
-console.log(searchInsert([1,3,5,6], 7))//4 - DONE
+console.log(searchInsert([1, 3, 5, 6], 5)); //2 - DONE
+console.log(searchInsert([1, 3, 5, 6], 2)); //1 - DONE
+console.log(searchInsert([1, 3, 5, 6], 7)); //4 - DONE
 
 /*22.Write an algorithm to determine if a number n is happy.A happy number is a number defined by the following process:
 Starting with any positive integer, replace the number by the sum of the squares of its digits.
 Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.
 Those numbers for which this process ends in 1 are happy.Return true if n is a happy number, and false if not.*/
-const isHappy = function(num) {
+const isHappy = function (num) {
   //хранение значений
-  let hash = {}
+  let hash = {};
   //пока значение не равно 1 и не втсречалось в d hash
-  while(num !==1 && !hash[num]){
+  while (num !== 1 && !hash[num]) {
     //уже было
-    hash[num] =true
+    hash[num] = true;
     //получить getPow из текущего числа
-    num = getPow(num)
+    num = getPow(num);
   }
   //если число счастливое возврашаем true, если нет false
-  return num === 1
+  return num === 1;
 };
 
-function getPow(n){
-  let str = String(n).split("")
-    let sum =0
-    for(let i=0; i<str.length; i++){
-      sum += Math.pow(Number(str[i]),2)
-    }
-    return sum
+function getPow(n) {
+  let str = String(n).split("");
+  let sum = 0;
+  for (let i = 0; i < str.length; i++) {
+    sum += Math.pow(Number(str[i]), 2);
+  }
+  return sum;
 }
 
-console.log(isHappy(19))//true - DONE
-console.log(isHappy(2))//false - DONE
-console.log(isHappy(7))//true - DONE
-//100 Leetcode challenge: Task 21
+console.log(isHappy(19)); //true - DONE
+console.log(isHappy(2)); //false - DONE
+console.log(isHappy(7)); //true - DONE
+
+/*23.Given a string s, return the number of segments in the string.A segment is defined to be a contiguous sequence of non-space characters.*/
+const countSegments = function (s) {
+  let arr = s.split(" ");
+  let count = 0;
+
+  for (let segment of arr) {
+    //если не пустая строка
+    if (segment !== "") {
+      count++;
+    }
+  }
+  return count;
+};
+
+console.log(countSegments("Hello, my name is John")); //5-DONE
+console.log(countSegments("Hello")); //1 - DONE
+
+/*24.Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M..*/
+const romanToInt = function (s) {
+  const romanNumerals = {
+    I: 1,
+    V: 5,
+    X: 10,
+    L: 50,
+    C: 100,
+    D: 500,
+    M: 1000,
+  };
+  let arr = s.split("");
+  let sum = 0;
+  arr.forEach((letter) => {
+    if (letter in romanNumerals) {
+      sum += romanNumerals[letter];
+    }
+  });
+
+  return sum;
+};
+console.log(romanToInt("III")); //3
+console.log(romanToInt("LVIII")); //58
+console.log(romanToInt("MCMXCIV")); //2216 ??? 1994
+
+//100 Leetcode challenge: Tasks 23-24
