@@ -386,18 +386,63 @@ const romanToInt = function (s) {
     D: 500,
     M: 1000,
   };
-  let arr = s.split("");
+
   let sum = 0;
-  arr.forEach((letter) => {
-    if (letter in romanNumerals) {
-      sum += romanNumerals[letter];
+  for(let i =0; i< s.length; i++){
+    //текущее зачение
+    let cur = romanNumerals[s[i]]
+    //след значение
+    let nextNum = romanNumerals[s[i+1]]
+    //если текущее меньше чем след
+    if(cur<nextNum){
+      //текущий вычитается
+      sum -= cur
+    } else{
+      sum += cur
     }
-  });
+  }
 
   return sum;
 };
-console.log(romanToInt("III")); //3
-console.log(romanToInt("LVIII")); //58
-console.log(romanToInt("MCMXCIV")); //2216 ??? 1994
+console.log(romanToInt("III")); //3 -DONE
+console.log(romanToInt("LVIII")); //58 -DONE
+console.log(romanToInt("MCMXCIV")); // 1994- DONE
 
-//100 Leetcode challenge: Tasks 23-24
+/*25.Given a string s containing just the characters '(',   ')',   '{',   '}',  '[' and ']', determine if the input string is valid.
+An input string is valid if:
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+Every close bracket has a corresponding open bracket of the same type.*/
+const isValid = function(s) {
+  //для сравнения и сохранения
+  let check = [];
+  const symbols = {
+    ')': '(',
+    '}': '{',
+    ']': '['
+  }
+  //символ есть в строке
+  for(let char of s){
+    //если массиы включает символ
+    if(['(', '{', '['].includes(char)){
+      //пушим в проверяющий массив
+      check.push(char)
+      //если нет
+    } else {
+      //если последний эл-т не равен char
+      if(check.pop() !==symbols[char]){
+        return false
+      }
+    }
+  }
+  //если check пуст все пары найдены, если нет false
+  return check.length === 0 
+};
+
+console.log(isValid("()"))
+console.log(isValid("()[]{}"))
+console.log(isValid("(]"))
+
+
+
+//100 Leetcode challenge: Tasks 24-25
