@@ -49,13 +49,36 @@ console.log(isPalindrome(-121)); //false - DONE
 // console.log(isPalindrome(10));//false - DONE
 
 /*5.You are given the heads of two sorted linked lists list1 and list2.Merge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists.Return the head of the merged linked list.*/
+
 const mergeTwoLists = function (list1, list2) {
-  let newArr = list1.concat(list2).sort();
-  return newArr;
+  //фективный узел новая точка входа
+  let fecList = new ListNode(-1);
+  //отследить текущий узел
+  let prev = fecList
+  //пока есть узлы
+  while(list1 !== null && list2 !== null){
+    //если у узла меньшее значение
+    if(list1.val <= list2.val){
+      //
+      prev.next = list1;
+      list1 = list1.next
+    } else{
+      prev.list2 = list2;
+      list2 = list2.next
+    }
+    //обновить фективный узел
+    prev = prev.next
+  }
+  //если узлы в одном из списков закончились добавлять все остальные 
+  prev.next = list1 === null ? list2 : list1;
+
+  return fecList.next
 };
 
-console.log(mergeTwoLists([1, 2, 4], [1, 3, 4])); // [1, 1, 2, 3, 4, 4] -DONE
-console.log(mergeTwoLists([], [])); // [] -DONE
+console.log(mergeTwoLists([1, 2, 4], [1, 3, 4])); 
+console.log(mergeTwoLists([], [])); 
+
+
 
 /*6.Given an array nums of size n, return the majority element.The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.*/
 const majorityElement = function (nums) {
@@ -444,5 +467,4 @@ console.log(isValid("()[]{}"))
 console.log(isValid("(]"))
 
 
-
-//100 Leetcode challenge: Tasks 24-25
+//100 Leetcode challenge: Tasks 5
