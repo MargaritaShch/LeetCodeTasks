@@ -50,33 +50,33 @@ console.log(isPalindrome(-121)); //false - DONE
 
 /*5.You are given the heads of two sorted linked lists list1 and list2.Merge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists.Return the head of the merged linked list.*/
 
-const mergeTwoLists = function (list1, list2) {
-  //фективный узел новая точка входа
-  let fecList = new ListNode(-1);
-  //отследить текущий узел
-  let prev = fecList
-  //пока есть узлы
-  while(list1 !== null && list2 !== null){
-    //если у узла меньшее значение
-    if(list1.val <= list2.val){
-      //
-      prev.next = list1;
-      list1 = list1.next
-    } else{
-      prev.list2 = list2;
-      list2 = list2.next
-    }
-    //обновить фективный узел
-    prev = prev.next
-  }
-  //если узлы в одном из списков закончились добавлять все остальные 
-  prev.next = list1 === null ? list2 : list1;
+// const mergeTwoLists = function (list1, list2) {
+//   //фективный узел новая точка входа
+//   let fecList = new ListNode(-1);
+//   //отследить текущий узел
+//   let prev = fecList
+//   //пока есть узлы
+//   while(list1 !== null && list2 !== null){
+//     //если у узла меньшее значение
+//     if(list1.val <= list2.val){
+//       //
+//       prev.next = list1;
+//       list1 = list1.next
+//     } else{
+//       prev.next = list2;
+//       list2 = list2.next
+//     }
+//     //обновить фективный узел
+//     prev = prev.next
+//   }
+//   //если узлы в одном из списков закончились добавлять все остальные 
+//   prev.next = list1 === null ? list2 : list1;
 
-  return fecList.next
-};
+//   return fecList.next
+// };
 
-console.log(mergeTwoLists([1, 2, 4], [1, 3, 4])); 
-console.log(mergeTwoLists([], [])); 
+// console.log(mergeTwoLists([1, 2, 4], [1, 3, 4])); 
+// console.log(mergeTwoLists([], [])); 
 
 
 
@@ -127,13 +127,20 @@ console.log(strStr("leetcode", "leeto")); //-1-DONE
 /*10.Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.Consider the number of unique elements of nums to be k, to get accepted, you need to do the following things:Change the array nums such that the first k elements of nums contain the unique elements in the order they were present in nums initially. The remaining elements of nums are not important as well as the size of nums.
 Return k.*/
 const removeDuplicates = function (nums) {
-  const uniqNums = new Set(nums);
-  console.log(uniqNums);
-  return Array.from(uniqNums);
+  if(nums.length === 0) return 0;
+  //position
+  let pos = 1;
+  for(let i = 1; i<nums.length; i++){
+    if(nums[i] !== nums[i-1]){
+      nums[pos]= nums[i]
+      pos++
+    }
+  }
+  return pos
 };
 
-console.log(removeDuplicates([1, 1, 2])); //[1, 2] -DONE
-console.log(removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4])); //[0, 1, 2, 3, 4] - DONE
+console.log(removeDuplicates([1, 1, 2])); //2 -DONE
+console.log(removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4])); //5 - DONE
 
 /*11.Write a function to find the longest common prefix string amongst an array of strings.If there is no common prefix, return an empty string "".*/
 const longestCommonPrefix = function (strs) {
@@ -466,5 +473,15 @@ console.log(isValid("()"))
 console.log(isValid("()[]{}"))
 console.log(isValid("(]"))
 
+/*26.Given two binary strings a and b, return their sum as a binary string.*/
+const addBinary = function(a, b) {
+    let access = parseInt(a,2)
+    let access2 = parseInt(b,2)
+    let sum = access+access2
+    return sum.toString(2)
+};
 
-//100 Leetcode challenge: Tasks 5
+console.log(addBinary("11","1"))//100 - DONE
+console.log(addBinary("1010","1011"))//10101 - DONE
+console.log(addBinary("10100000100100110110010000010101111011011001101110111111111101000000101111001110001111100001101","110101001011101110001111100110001010100001101011101010000011011011001011101111001100000011011110011"))//???
+//100 Leetcode challenge: Tasks 10 & 26
